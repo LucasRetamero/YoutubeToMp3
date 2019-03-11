@@ -3,7 +3,7 @@ extends base.pug
 block header
 
   <!-- Header -->
-  header(class="masthead bg-primary text-white text-center")
+  header(class="masthead bg-primary text-white text-center",id="objetivo")
    div(class="container")
     hr
     h1(class="text-uppercase mb-0") Youtube to mp3
@@ -14,7 +14,7 @@ block header
 block technologia
 
  <!-- technologia -->
- header(class="masthead bg-light text-white text-center")
+ header(class="masthead bg-light text-white text-center",id="technologia")
   div(class="container")
   hr
   h1(class="text-uppercase mb-0 text-primary") Technologias
@@ -30,17 +30,33 @@ block technologia
 
 block formEntradaConverter
 
- <!-- Tutorial -->
- - var dates = ['testing','testing everything'];
-
  <!-- Header -->
  header(class="masthead bg-primary text-white text-center")
-  div(class="container")
+  div(class="container",id="projeto")
    hr
    h1(class="text-uppercase mb-0") Projeto
    hr
-   h2(class="font-weight-light mb-0") Tutorial
+   h2(class="font-weight-light mb-0") Info para download
    hr
-   ul
-    each val in dates.length
-     li= val
+   <!-- Form para entrada de dados do video e caminho de instalação-->
+   form(action="",method="post")
+
+    div(class="form-group")
+     label(for="exampleInputEmail1") Url do video
+     input(type="email",class="form-control",id="exampleInputUrlVideo",aria-describedby="emailHelp",placeholder="Url do video")
+
+    div(class="form-group")
+      label(for="exampleInputEmail1") Nome do arquivo
+      input(type="email",class="form-control",id="exampleInputNameFile",aria-describedby="emailHelp",placeholder="Nome do arquivo")
+
+    div(class="form-group")
+      label(for="exampleInputEmail1") Caminho onde salvar
+      input(type="email",class="form-control",id="exampleInputWayFile",aria-describedby="emailHelp",placeholder="Caminho onde salvar o arquivo")
+
+    hr
+
+    div(class="form-group")
+     button(type="submit" class="btn btn-light btn-lg btn-block") Youtube to Mp3
+
+   hr
+   hr
