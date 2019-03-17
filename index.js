@@ -1,9 +1,11 @@
 //create vars
 var express    = require('express');
-var app        = express();
-var bodyParser = require('body-parser');
-var horizon    = require('horizon-youtube-mp3');
-
+var app          = express();
+var bodyParser   = require('body-parser');
+var horizon      = require('horizon-youtube-mp3');
+var path         = require('path');
+var downloadPath = path.join(__dirname);
+var testing      = "Hello World"; 
 //open pug file
 app.set('view engine','pug');
 //use foldes
@@ -28,24 +30,49 @@ app.post('/download-video',function(req,res){
 return res.send(req.body);
 });
 
-
-horizon.getInfo('http://youtube.com/watch?v=NEA0BLnpOtg', function(err, e){
- 
-  console.log(e);
- 
-  /**
-     * Will Return:
-     *
-     * { isValid: true,
-     *   videoName: 'OZIELZINHO - TOP GEAR 2.0',
-     *   videoThumb: 'https://i.ytimg.com/vi/NEA0BLnpOtg/hqdefault.jpg?custom=true&w=320&h=180&stc=true&jpg444=true&jpgq=90&sp=68&sigh=FoGsoudXCGPU-Fb6epRh1eIzVDs',
-     *   videoTime: '2:35',
-     *   videoTimeSec 244,
-     *   videoThumbList: {sd: 'http...', mq: 'http...', hq: 'http...', hd: 'http...'},
-     *   videoFile: 'https://....'
-     *   videoFormats: [...]}
-     */
+//create success download route
+app.get('/download-success',function(req,res){
+return res.render(__dirname+'/public/'+'success');
 });
+
+//create download route
+app.get('/download-mp3',function(req,res){
+horizon.downloadToLocal(
+  'https://www.youtube.com/watch?v=WcTRQXtXJPs',
+  downloadPath,
+  null,
+  null,
+  null,
+  onConvertVideoComplete,
+  onConvertVideoProgress
+)
+});
+
+//testing download of video
+/*
+horizon.downloadToLocal(
+  'https://www.youtube.com/watch?v=WcTRQXtXJPs',
+  downloadPath,
+  null,
+  null,
+  null,
+  onConvertVideoComplete,
+  onConvertVideoProgress
+);
+ */
+function onConvertVideoComplete(err, result) {
+  console.log(err, result);
+  // Will return...
+  //null, conversionFileComplete
+}
+ 
+function onConvertVideoProgress(percent, timemark, targetSize) {
+  console.log('Progress:', percent, 'Timemark:', timemark, 'Target Size:', targetSize);
+  // Will return...
+  // Progress: 90.45518257038955 Timemark: 00:02:20.04 Target Size: 2189
+  // Progress: 93.73001672942894 Timemark: 00:02:25.11 Target Size: 2268
+  // Progress: 100.0083970106642 Timemark: 00:02:34.83 Target Size: 2420
+}
 
 //create listen event
 app.listen(3000,function(){
