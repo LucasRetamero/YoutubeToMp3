@@ -28,6 +28,8 @@ block technologia
   p(class="text-primary") Pug como intermediario entre o NodeJs e o html e BootStrap na criação do template.O uso de ambos para uma melhor produtividade e facilitar futuras manutenções.
   h3(class="font-weight-light mb-0 text-primary") Express FrameWork
   p(class="text-primary") Usado para obter o melhor desempenho do NodeJs
+  h3(class="font-weight-light mb-0 text-primary") horizon-youtube-mp3
+  p(class="text-primary") Usada para fazer o download e a conversão para o formato mp3
 
 block formEntradaConverter
 
@@ -40,7 +42,7 @@ block formEntradaConverter
    h2(class="font-weight-light mb-0") Info para download
    hr
    <!-- Form para entrada de dados do video e caminho de instalação-->
-   form(action="/download-video",method="post")
+   form(action="/download-mp3",method="post")
 
     div(class="form-group")
      label(for="exampleInputEmail1") Url do video
